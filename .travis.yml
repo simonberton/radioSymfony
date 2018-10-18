@@ -10,9 +10,6 @@ cache:
 
 # Base versions to test raw with the Symfony latest version.
 php:
-  - 5.3
-  - 5.4
-  - 5.5
   - 5.6
   - 7.0
   - hhvm
