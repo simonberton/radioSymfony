@@ -10,7 +10,6 @@ cache:
 
 # Base versions to test raw with the Symfony latest version.
 php:
-  - 5.6
   - 7.0
   - hhvm
 
@@ -25,13 +24,6 @@ matrix:
   # Fast finish allows to set the build as "finished" even if the "allow_failures" matrix elements are not finished yet.
   fast_finish: true
   include:
-    # Lowest dependency
-    - php: 5.6
-      env: SYMFONY_VERSION="2.7.x"
-    - php: 5.6
-      env: SYMFONY_VERSION="2.8.x"
-    - php: 5.6
-      env: SYMFONY_VERSION="dev-master"
   allow_failures:
     - php: hhvm
     - php: 7.0
