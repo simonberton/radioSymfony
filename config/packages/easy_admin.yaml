@@ -1,0 +1,30 @@
+easy_admin:
+   entities:
+#        # List the entity class name you want to manage
+#        - App\Entity\Product
+#        - App\Entity\Category
+        Tag:
+            class: App\Entity\Tag
+        Programa:
+            class: App\Entity\Programa
+            form:
+                fields:
+                    - { property: 'title'}
+                    - { property: 'posts'}
+        Post:
+            class: App\Entity\Post
+            form:
+                fields:
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'audioFile', type: 'vich_file' }
+                    - { property: 'title'}
+                    - { property: 'description'}
+                    - { property: 'programas'}
+        Slide:
+            class: App\Entity\Slide
+            form:
+                fields:
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'title'}
+                    - { property: 'status'}
+                    - { property: 'description'}

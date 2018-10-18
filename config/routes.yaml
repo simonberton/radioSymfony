@@ -1,0 +1,27 @@
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+
+home_slides:
+    path: /slides
+    controller: App\Controller\ApiController::getSlides
+
+home_posts:
+    path: /posts
+    controller: App\Controller\ApiController::getPosts
+
+home_programas:
+    path: /programas
+    controller: App\Controller\ApiController::getProgramas
+
+contacto_post:
+    path: /contacto
+    controller: App\Controller\ApiController::contacto
+
+post_data:    
+    path: /posts/{slug}
+    controller: App\Controller\ApiController::getPostData
+
+programa_data:    
+    path: /programas/{slug}
+    controller: App\Controller\ApiController::getProgramaData
