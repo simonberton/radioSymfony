@@ -89,4 +89,4 @@ script:
  
 # After a build, send email notification with the build results
 notifications:
- email: simonberton@gmail.com
+ email: none
