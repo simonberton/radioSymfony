@@ -85,6 +85,7 @@ install:
 # Run script
 script:
  - phpunit
+ - vendor/bin/behat
  
 # After a build, send email notification with the build results
 notifications:
