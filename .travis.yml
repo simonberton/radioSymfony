@@ -4,10 +4,6 @@ language: php
  
 php:
  
- - 7.0
- 
- - 7.1
- 
  - 7.2
  
  - hhvm
@@ -64,7 +60,7 @@ matrix:
  # Fast finish allows to set the build as "finished" even if the "allow_failures" matrix elements are not finished yet.
  fast_finish: true
  include:
-   - php: 7.0
+   - php: 7.2
    - php: hhvm
  allow_failures:
    - php: hhvm
