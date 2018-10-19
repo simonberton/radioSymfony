@@ -72,6 +72,9 @@ env:
 # Update composer
 before-install:
  - composer self-update
+ - wget https://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer
+ - sudo chmod a+x php-cs-fixer
+ - sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
  
 # Install composer dependencies,
 # Create database, schema and fixtures
@@ -86,8 +89,8 @@ install:
 script:
  - phpunit
  - vendor/bin/behat
- - php vendor/bin/php-cs-fixer
+ - php-cs-fixer
  
 # After a build, send email notification with the build results
 notifications:
- email: simonberton@gmail.com
+ email: none
