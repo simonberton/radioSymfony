@@ -12,7 +12,7 @@ cache:
     
 # Settings version PHP
 php:
-   - 7.1
+   - 7.2
    
 # Define an environment variable
 env:
