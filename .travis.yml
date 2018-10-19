@@ -1,5 +1,3 @@
-# Required to run your project under the correct environment.
- 
 language: php
  
 # Versions of PHP you want your project run with.
@@ -34,6 +32,8 @@ matrix:
  
  allow_failures:
  
+   - php: 5.6
+ 
    - php: hhvm
  
  fast_finish: true
@@ -45,16 +45,6 @@ notifications:
    on_success: never
  
    on_failure: always
- 
-Here I’ve added the PHP versions that are allowed for the projects.
- 
-before_script allows you to run command before the environment actually executes.
- 
-allow_failures contains the conditions that allow your build to fail.
- 
-notifications will notify you in all scenarios of build success or failure.
- 
-If you are using Symfony 3, you can add this script provided by Antonio Jiménez
  
 # Project language
 language: php
@@ -76,6 +66,8 @@ matrix:
  # Fast finish allows to set the build as "finished" even if the "allow_failures" matrix elements are not finished yet.
  fast_finish: true
  include:
+   - php: 5.5
+   - php: 5.6
    - php: 7.0
    - php: hhvm
  allow_failures:
@@ -104,4 +96,4 @@ script:
  
 # After a build, send email notification with the build results
 notifications:
- email: your_email
+ email: simonberton@gmail.com
