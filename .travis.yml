@@ -86,7 +86,8 @@ install:
 script:
  - phpunit
  - vendor/bin/behat
+ - php vendor/bin/php-cs-fixer
  
 # After a build, send email notification with the build results
 notifications:
- email: none
+ email: simonberton@gmail.com
