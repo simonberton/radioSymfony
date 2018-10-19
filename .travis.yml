@@ -80,7 +80,7 @@ before-install:
 # Install composer dependencies,
 # Create database, schema and fixtures
 install:
- - composer update symfony/flex --no-plugins
+# - composer update symfony/flex --no-plugins
  - composer install
  - cp .env.dist .env
  - php bin/console doctrine:database:create --env=test
