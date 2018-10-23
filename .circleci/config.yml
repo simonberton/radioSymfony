@@ -32,6 +32,7 @@ jobs:
             - vendor
       - run : cp .env.dist .env
       - run : php bin/console doctrine:database:create --env=test --no-interaction
+      - run : php bin/console doctrine:schema:update --force --env=test 
       - run:
           name: Run PhpUnit
           command: vendor/bin/behat
