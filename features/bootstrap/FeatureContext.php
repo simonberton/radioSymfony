@@ -41,6 +41,7 @@ class FeatureContext implements Context
      */
     public function theResponseShouldBeReceived()
     {
+        var_dump($this->response);
         if ($this->response === null) {
             throw new \RuntimeException('No response received');
         }
