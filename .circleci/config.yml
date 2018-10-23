@@ -13,7 +13,7 @@ jobs:
           - MYSQL_USER=root
           - MYSQL_PASSWORD=
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
-          - MYSQL_DATABASE=circle_test
+          - MYSQL_DATABASE=symfony_db
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -23,7 +23,6 @@ jobs:
 
     steps:
       - checkout
-
       - run: composer self-update
       - run: composer install
       - run: cp .env.dist .env
