@@ -1,29 +1,41 @@
-machine:
-  php:
-    version: 7.0.0RC7
-  ruby:
-    version: 2.0.0-p481
+version: 2
 
-dependencies:
-  override:
-    - composer install --prefer-source --no-interaction --no-scripts
-    - cp app/config/parameters_test.circle.yml app/config/parameters_test.yml
-    - app/console doctrine:database:drop --env=test --no-interaction --force
-    - app/console doctrine:database:create --env=test --no-interaction
-    - app/console doctrine:schema:update --env=test --no-interaction  --force
-    - app/console doctrine:fixtures:load --env=test --no-interaction
-    - php app/console asset:install --env=test --no-interaction
-    - php app/console assetic:dump --env=test --no-interaction
-  post:
-    - rvm use 2.0.0-p481 do gem install psych
-    - gem install capifony
-
-test:
-  override:
-    - SYMFONY_DEPRECATIONS_HELPER="weak" phpunit -c app/
-
-deployment:
-  production:
-    branch: master
-    commands:
-      - cap -S revision=$CIRCLE_SHA1 deploy
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: notnoopci/php:7.1-apache-node
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_USER=ubuntu
+          - MYSQL_PASSWORD=
+          - MYSQL_HOST=127.0.0.1
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
+          - MYSQL_DATABASE=mv24
+    steps:
+      - run:
+          name: Install PHP extensions
+          command: sudo docker-php-ext-install pdo_mysql
+      - run:
+          name: Install Composer
+          command: 'curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer'
+      - run:
+          name: Display versions
+          command: |
+            php -v
+            composer --version
+      - checkout
+      - restore_cache:
+          keys:
+            - composer-v1-{{ checksum "composer.json" }}
+            - composer-v1-
+      - run:
+          name: Install project dependencies
+          command: composer install -n --prefer-dist
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.json" }}
+          paths:
+            - vendor
+      - run:
+          name: Run PhpUnit
+          command: vendor/bin/behat
