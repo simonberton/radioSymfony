@@ -37,4 +37,4 @@ jobs:
             - vendor
       - run:
           name: Run PhpUnit
-          command: ./vendor/bin/phpunit
+          command: vendor/bin/behat
