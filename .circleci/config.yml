@@ -36,7 +36,7 @@ jobs:
           key: composer-v1-{{ checksum "composer.json" }}
           paths:
             - vendor
-      - run : cp app/config/parameters_test.circle.yml app/config/parameters_test.yml
+      - run : cp config/parameters_test.circle.yml config/parameters_test.yml
       - run : app/console doctrine:database:drop --env=test --no-interaction --force
       - run : app/console doctrine:database:create --env=test --no-interaction
       - run:
