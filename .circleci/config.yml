@@ -18,4 +18,8 @@ jobs:
 
     steps:
       - checkout
-      - run: echo "A first hello"
+
+      - run: composer install -n 
+        
+      # run tests!
+      - run: phpunit
