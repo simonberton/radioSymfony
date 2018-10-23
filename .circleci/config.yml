@@ -19,7 +19,11 @@ jobs:
     steps:
       - checkout
 
-      - run: composer install -n 
+      - run: composer self-update
+      - run: composer install
+      - run: cp .env.dist .env
+      - run: php bin/console doctrine:database:create --env=test
+      - run: php bin/console doctrine:schema:create --env=test
         
       # run tests!
-      - run: phpunit
+      - run: vendor/bin/behat
