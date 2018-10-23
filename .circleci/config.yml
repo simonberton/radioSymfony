@@ -23,11 +23,11 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo apt install -y mysql-client
+      #- run: sudo apt install -y mysql-client
       - run: composer self-update
       - run: composer install
       - run: cp .env.dist .env
-      - run: php bin/console doctrine:database:create --env=test
+      #- run: php bin/console doctrine:database:create --env=test
       - run: php bin/console doctrine:schema:create --env=test
         
       # run tests!
