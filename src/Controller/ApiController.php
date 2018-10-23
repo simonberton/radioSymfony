@@ -23,7 +23,6 @@ class ApiController extends Controller
         $response = new Response();
 
         $host = $request->server->get('HTTP_HOST');
-        $entityManager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Post::class);
         $resultados = $repository->findAllOrderByIdDesc(9);
         $retorno = array();
@@ -53,7 +52,6 @@ class ApiController extends Controller
         $response->headers->set('Access-Control-Allow-Origin', '*');
         // Or a predefined website   
         return $response;
-        //return $this->json($resultados);
     }
 
     public function getPostData(Request $request, $slug)
@@ -61,7 +59,6 @@ class ApiController extends Controller
         $response = new Response();
 
         $host = $request->server->get('HTTP_HOST');
-        $entityManager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Post::class);
         $post = $repository->findOneBySlug($slug);
         $retorno = array();
@@ -93,7 +90,6 @@ class ApiController extends Controller
         $response = new Response();
         $retorno = array();
         $host = $request->server->get('HTTP_HOST');
-        $entityManager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Slide::class);
         $resultados = $repository->findAllOrderByIdDescAndLimit(3);
         foreach($resultados as $key => &$slide)
@@ -178,7 +174,6 @@ class ApiController extends Controller
         $response = new Response();
 
         $host = $request->server->get('HTTP_HOST');
-        $entityManager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Programa::class);
         $resultados = $repository->findAllOrderByIdDesc(10);
         $retorno = array();
@@ -207,7 +202,6 @@ class ApiController extends Controller
         $response = new Response();
 
         $host = $request->server->get('HTTP_HOST');
-        $entityManager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Programa::class);
         $programa = $repository->findOneBySlug($slug);
         $retorno = array();

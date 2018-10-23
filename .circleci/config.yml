@@ -1,0 +1,38 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: notnoopci/php:7.1-apache-node
+      - image: circleci/mysql:5.7
+    steps:
+      - run:
+          name: Install PHP extensions
+          command: sudo docker-php-ext-install pdo_mysql
+      - run:
+          name: Install Composer
+          command: 'curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer'
+      - run:
+          name: Display versions
+          command: |
+            php -v
+            composer --version
+      - checkout
+      - restore_cache:
+          keys:
+            - composer-v1-{{ checksum "composer.json" }}
+            - composer-v1-
+      - run:
+          name: Install project dependencies
+          command: composer install -n --prefer-dist
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.json" }}
+          paths:
+            - vendor
+      - run : cp .env.dist .env
+      - run : php bin/console doctrine:database:create --env=test --no-interaction
+      - run : php bin/console doctrine:schema:update --force --env=test 
+      - run:
+          name: Run Behat tests
+          command: vendor/bin/behat
