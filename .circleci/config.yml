@@ -6,12 +6,6 @@ jobs:
     docker:
       - image: notnoopci/php:7.1-apache-node
       - image: circleci/mysql:5.7
-        environment:
-          - MYSQL_USER=ubuntu
-          - MYSQL_PASSWORD=
-          - MYSQL_HOST=127.0.0.1
-          - MYSQL_ALLOW_EMPTY_PASSWORD=true
-          - MYSQL_DATABASE=mv24
     steps:
       - run:
           name: Install PHP extensions
@@ -36,7 +30,7 @@ jobs:
           key: composer-v1-{{ checksum "composer.json" }}
           paths:
             - vendor
-      - run : cp config/parameters_test.circle.yml config/parameters_test.yml
+      - run : cp .env.dist .env
       - run : php bin/console doctrine:database:drop --env=test --no-interaction --force
       - run : php bin/console doctrine:database:create --env=test --no-interaction
       - run:
